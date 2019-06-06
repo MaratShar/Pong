@@ -20,28 +20,29 @@ var stepY = 2
 var stepRacket = 0
 var score = 0
 var attempts = 4
+var r = parseInt(document.querySelector("circle").getAttribute("r"))
 
 function move() {
 	var cx = document.querySelector("circle").getAttribute("cx");
 	cx = parseInt(cx) + stepX
-	if (cx == width || cx == 0) {
+	if (cx + r == width || cx - r == 0) {
 		stepX = -stepX
 	}
 	document.querySelector("circle").setAttribute("cx", cx);
 	var cy = document.querySelector("circle").getAttribute("cy");
 	cy = parseInt(cy) + stepY
-	if (cy == height || cy == 0) {
+	if (cy + r == height || cy - r== 0) {
 		stepY = -stepY
 	}
 	var racketY = parseInt(document.querySelector("rect").getAttribute("y"))
 	var racketX = parseInt(document.querySelector("rect").getAttribute("x"));
 	var racketWidth = parseInt(document.querySelector("rect").getAttribute("width"));
-	if (cy == racketY && cx >= racketX && cx <= racketX + racketWidth) {
+	if (cy + r== racketY && cx >= racketX && cx <= racketX + racketWidth) {
 		stepY = -stepY
 		score++
 		document.querySelector("#score").innerHTML = score
 	}
-	if (cy == width || cy == 900) {
+	if (cy + r == height) {
 		attempts--
 		document.querySelector("#attempts").innerHTML = attempts
 	}
